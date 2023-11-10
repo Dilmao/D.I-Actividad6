@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 function Fomrulario() {
+
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [email, setEmail] = useState("")
@@ -14,18 +15,10 @@ function Fomrulario() {
     const [mensajeSexo, setMensajeSexo] = useState("")
     const [mensajeMensaje, setMensajeMensaje] = useState("")
     const [mensajeTerminos, setMensajeTerminos] = useState("")
-    
-    const [nombreValido, setNombreValido] = useState(true)
-    const [apellidoValido, setApellidoValido] = useState(true)
-    const [emailValido, setEmailValido] = useState(true)
-    const [sexoValido, setSexoValido] = useState(true)
-    const [mensajeValido, setMensajeValido] = useState(true)
-    const [terminosValido, setTerminosValido] = useState(true)
 
-        //TODO ENVIAR TODAS LAS FUNCIONES A UN CODIGO DIFERENTE
     function handleValidateNombre(event) {
         const enteredNombre = event.target.value
-        if(enteredNombre.length > 0 && enteredNombre.length <= 10) {
+        if(enteredNombre !== "" && enteredNombre.length <= 10) {
             setNombre(enteredNombre)
             setMensajeNombre("")
         } else if(enteredNombre.length > 10) {
@@ -37,7 +30,7 @@ function Fomrulario() {
 
     function handleValidateApellido(event) {
         const enteredApellido = event.target.value
-        if(enteredApellido.length > 0 && enteredApellido.length <= 20) {
+        if(enteredApellido !== "" && enteredApellido.length <= 20) {
             setApellido(enteredApellido)
             setMensajeApellido("")
         } else if(enteredApellido.length > 20) {
@@ -49,10 +42,9 @@ function Fomrulario() {
 
     function handleValidateEmail(event) {
         const enteredEmail = event.target.value
-        if(enteredEmail.length > 0 && enteredEmail.length <= 20 && enteredEmail.includes("@")) {
+        if(enteredEmail !== "" && enteredEmail.length <= 20 && enteredEmail.includes("@")) {
             setEmail(enteredEmail)
             setMensajeEmail("")
-            console.log("Email ha sido modificado")
         } else if(enteredEmail.length > 20) {
             setMensajeEmail("El email no debe ser superior a 20 caracteres")
         } else if(!enteredEmail.includes("@")) {
@@ -70,12 +62,11 @@ function Fomrulario() {
         } else {
             setMensajeSexo("El sexo no puede estar vacio")
         }
-        console.log("Sexo ha sido modificado")
     }
 
     function handleValidateMensaje(event) {
         const enteredMensaje = event.target.value
-        if(enteredMensaje.length > 0 && enteredMensaje.length <= 500) {
+        if(enteredMensaje.length <= 500) {
             setMensaje(enteredMensaje)
             setMensajeMensaje("")
         } else {
@@ -84,58 +75,60 @@ function Fomrulario() {
     }
 
     function handleValidateTerminos(event) {
-        const enteredTerminos = event.target.value;
-        console.log(enteredTerminos);
-        
+        const enteredTerminos = event.target.checked
+        if (enteredTerminos) {
+            setTerminos(true)
+            setMensajeTerminos("")
+        } else {
+            setTerminos(false)
+            setMensajeTerminos("Se tienen que aceptar los terminos y condiciones")
+        }
     }
 
     return (
         <div>
             <h1>Formulario</h1>
 
-            <div><br/>
+            <div>
+                <br/>
                 <label>Introduzca su nombre: </label>
-                <input type="text" name="nombre" onChange={handleValidateNombre}/>
+                <input type="text" onChange={handleValidateNombre}/>
                 <p>{mensajeNombre}</p>
-            </div>
 
-            <div><br/>
+                <br/>
                 <label>Introduzca sus apellidos: </label>
-                <input type="text" name="apellidos" onChange={handleValidateApellido}/>
+                <input type="text" onChange={handleValidateApellido}/>
                 <p>{mensajeApellido}</p>
-            </div>
-
-            <div><br/>
+            
+                <br/>
                 <label>Introduzca su email: </label>
-                <input type="email" name="email" onChange={handleValidateEmail}/>
+                <input type="email" onChange={handleValidateEmail}/>
                 <p>{mensajeEmail}</p>
-            </div>
-
-            <div><br/>
+            
+                <br/>
                 <label>Introduzca su sexo: </label>
                 <select onChange={handleValidateSexo}>
                     <option value=""></option>
-                    <option value="hombre">Hombre</option>
-                    <option value="mujer">Mujer</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
                 </select>
                 <p>{mensajeSexo}</p>
-            </div>
-
-            <div><br/>
+            
+                <br/>
                 <label>Introduzca su mensaje: </label>
                 <textarea onChange={handleValidateMensaje}></textarea>
+                <span> Caracteres: {500 - mensaje.length}</span>
                 <p>{mensajeMensaje}</p>
-            </div>
-
-            <div><br/>
+            
+                <br/>
                 <label>Acepto los terminos y condiciones: </label>
-                <input type="checkbox" onChange={(e) => (console.log(e.target.checked))}/>
+                <input type="checkbox" onChange={handleValidateTerminos}/>
                 <p>{mensajeTerminos}</p>
             </div>
 
-            <div><br/><br/>
-                <button type="submit">Click to submit</button>
-            </div>
+            <br/>
+            <button type="submit">Click to submit</button>
+            
         </div>
     )
 }
