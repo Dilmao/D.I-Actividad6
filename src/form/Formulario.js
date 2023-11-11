@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 function Fomrulario() {
 
@@ -15,6 +15,7 @@ function Fomrulario() {
     const [mensajeSexo, setMensajeSexo] = useState("")
     const [mensajeMensaje, setMensajeMensaje] = useState("")
     const [mensajeTerminos, setMensajeTerminos] = useState("")
+    const [mensajeButton, setMensajeButton] = useState("")
 
     function handleValidateNombre(event) {
         const enteredNombre = event.target.value
@@ -85,27 +86,50 @@ function Fomrulario() {
         }
     }
 
-    return (
-        <div>
-            <h1>Formulario</h1>
+    const handleValidateAll = useCallback(() => {
+        if 
+        (
+            (nombre !== "" || nombre <= 10) &&
+            (apellido !== "" || apellido <= 20) &&
+            (email !== "" || email <= 20 || email.includes("@")) &&
+            (sexo !== "") &&
+            (mensaje.length <= 500) &&
+            (terminos)
+        ) {
+            setMensajeButton("Se puede enviar el formulario")
+        } else {
+            setMensajeButton("Falta uno o mas campos por rellenar")
+        }
+    }, [nombre, apellido, email, sexo, mensaje, terminos])
 
+    useEffect(
+        function(){
+            handleValidateAll();
+        },
+        [handleValidateAll]
+    );
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    return (
+        <form onSubmit = {handleSubmit}>
             <div>
-                <br/>
+                <h1>Formulario</h1>
+        
                 <label>Introduzca su nombre: </label>
                 <input type="text" onChange={handleValidateNombre}/>
                 <p>{mensajeNombre}</p>
 
-                <br/>
                 <label>Introduzca sus apellidos: </label>
                 <input type="text" onChange={handleValidateApellido}/>
                 <p>{mensajeApellido}</p>
-            
-                <br/>
+
                 <label>Introduzca su email: </label>
                 <input type="email" onChange={handleValidateEmail}/>
                 <p>{mensajeEmail}</p>
-            
-                <br/>
+
                 <label>Introduzca su sexo: </label>
                 <select onChange={handleValidateSexo}>
                     <option value=""></option>
@@ -113,23 +137,21 @@ function Fomrulario() {
                     <option value="Mujer">Mujer</option>
                 </select>
                 <p>{mensajeSexo}</p>
-            
-                <br/>
+
                 <label>Introduzca su mensaje: </label>
                 <textarea onChange={handleValidateMensaje}></textarea>
                 <span> Caracteres: {500 - mensaje.length}</span>
                 <p>{mensajeMensaje}</p>
-            
-                <br/>
+
                 <label>Acepto los terminos y condiciones: </label>
                 <input type="checkbox" onChange={handleValidateTerminos}/>
                 <p>{mensajeTerminos}</p>
-            </div>
 
-            <br/>
-            <button type="submit">Click to submit</button>
-            
-        </div>
+                <br/>
+                <button type="submit">Click to submit</button>
+                <p>{mensajeButton}</p>
+            </div>
+        </form>
     )
 }
 

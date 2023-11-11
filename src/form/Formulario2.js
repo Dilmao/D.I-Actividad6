@@ -2,7 +2,7 @@ import FormularioHandler from "./FormularioHandler"
 
 //Intentar hacer con 'FormularioHandler' para ocupar menos espacio en 'Formulario'
 
-function Fomrulario() {
+function Fomrulario3() {
     const formHandler = new FormularioHandler()
 
     return (
@@ -52,4 +52,4 @@ function Fomrulario() {
     )
 }
 
-export default Fomrulario
+export default Fomrulario2
