@@ -1,3 +1,4 @@
+import './Formulario.css'
 import { useCallback, useEffect, useState } from "react"
 
 function Fomrulario() {
@@ -111,46 +112,46 @@ function Fomrulario() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //TODO falta guardar los datos en un array de objetos
     }
 
     return (
-        <form onSubmit = {handleSubmit}>
+        <form className='Form' onSubmit = {handleSubmit}>
             <div>
-                <h1>Formulario</h1>
+                <h1 className='Texto'>Formulario</h1>
         
-                <label>Introduzca su nombre: </label>
-                <input type="text" onChange={handleValidateNombre}/>
-                <p>{mensajeNombre}</p>
+                <p className='Texto'>Introduzca su nombre: </p>
+                <input type="text" className='Campo' onChange={handleValidateNombre}/>
+                <p className='Texto'>{mensajeNombre}</p>
 
-                <label>Introduzca sus apellidos: </label>
-                <input type="text" onChange={handleValidateApellido}/>
-                <p>{mensajeApellido}</p>
+                <p className='Texto'>Introduzca sus apellidos: </p>
+                <input type="text" className='Campo' onChange={handleValidateApellido}/>
+                <p className='Texto'>{mensajeApellido}</p>
 
-                <label>Introduzca su email: </label>
-                <input type="email" onChange={handleValidateEmail}/>
-                <p>{mensajeEmail}</p>
+                <p className='Texto'>Introduzca su email: </p>
+                <input type="email" className='Campo' onChange={handleValidateEmail}/>
+                <p className='Texto'>{mensajeEmail}</p>
 
-                <label>Introduzca su sexo: </label>
-                <select onChange={handleValidateSexo}>
+                <p className='Texto'>Introduzca su sexo: </p>
+                <select className='Select' onChange={handleValidateSexo}>
                     <option value=""></option>
                     <option value="Hombre">Hombre</option>
                     <option value="Mujer">Mujer</option>
                 </select>
-                <p>{mensajeSexo}</p>
+                <p className='Texto'>{mensajeSexo}</p>
 
-                <label>Introduzca su mensaje: </label>
-                <textarea onChange={handleValidateMensaje}/>
-                <span> Caracteres: {500 - mensaje.length}</span>
-                <p>{mensajeMensaje}</p>
+                <p className='Texto'>Introduzca su mensaje: </p>
+                <textarea className='Area' onChange={handleValidateMensaje}/>
+                
+                <p className='Texto'> Caracteres: {500 - mensaje.length}</p>
+                <p className='Texto'>{mensajeMensaje}</p>
 
-                <label>Acepto los terminos y condiciones: </label>
                 <input type="checkbox" onChange={handleValidateTerminos}/>
-                <p>{mensajeTerminos}</p>
+                <laebl className='Texto'> Acepto los terminos y condiciones</laebl>
+                <p className='Texto'>{mensajeTerminos}</p>
 
                 <br/>
-                <button type="submit">Click to submit</button>
-                <p>{mensajeButton}</p>
+                <button type="submit" className='Boton'>Click to submit</button>
+                <p className='Texto'>{mensajeButton}</p>
             </div>
         </form>
     )
