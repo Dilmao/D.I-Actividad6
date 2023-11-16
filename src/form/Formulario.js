@@ -93,7 +93,7 @@ function Fomrulario() {
         (
             (nombre.length !== 0 && nombre.length <= 10) &&
             (apellido.length !== 0 && apellido.length <= 20) &&
-            (email.length <= 20) && email.includes("@") &&
+            (email.length <= 20 && email.includes("@")) &&
             (sexo !== "") &&
             (mensaje.length <= 500) &&
             (terminos)
