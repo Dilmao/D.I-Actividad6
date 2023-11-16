@@ -21,7 +21,7 @@ function Fomrulario() {
     const [mensajeButton, setMensajeButton] = useState("")
 
     function handleValidateNombre(event) {
-        const enteredNombre = event.target.value
+        let enteredNombre = event.target.value
         setNombre(enteredNombre)
         if(enteredNombre !== "" && enteredNombre.length <= 10) {
             setMensajeNombre("")
@@ -45,7 +45,7 @@ function Fomrulario() {
     }
 
     function handleValidateEmail(event) {
-        const enteredEmail = event.target.value
+        let enteredEmail = event.target.value
         setEmail(enteredEmail)
         if(enteredEmail !== "" && enteredEmail.length <= 20 && enteredEmail.includes("@")) {
             setMensajeEmail("")
@@ -59,7 +59,7 @@ function Fomrulario() {
     }
 
     function handleValidateSexo(event) {
-        const enteredSexo = event.target.value
+        let enteredSexo = event.target.value
         setSexo(enteredSexo)
         if(enteredSexo !== "") {
             setMensajeSexo("")
@@ -69,7 +69,7 @@ function Fomrulario() {
     }
 
     function handleValidateMensaje(event) {
-        const enteredMensaje = event.target.value
+        let enteredMensaje = event.target.value
         setMensaje(enteredMensaje)
         if(enteredMensaje.length <= 500) {
             setMensajeMensaje("")
@@ -79,7 +79,7 @@ function Fomrulario() {
     }
 
     function handleValidateTerminos(event) {
-        const enteredTerminos = event.target.checked
+        let enteredTerminos = event.target.checked
         setTerminos(enteredTerminos)
         if (enteredTerminos) {
             setMensajeTerminos("")
