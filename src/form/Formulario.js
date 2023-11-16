@@ -22,8 +22,8 @@ function Fomrulario() {
 
     function handleValidateNombre(event) {
         const enteredNombre = event.target.value
+        setNombre(enteredNombre)
         if(enteredNombre !== "" && enteredNombre.length <= 10) {
-            setNombre(enteredNombre)
             setMensajeNombre("")
         } else if(enteredNombre.length > 10) {
             setMensajeNombre("El nombre no debe ser superior a 10 caracteres")
@@ -33,9 +33,9 @@ function Fomrulario() {
     }
 
     function handleValidateApellido(event) {
-        const enteredApellido = event.target.value
+        let enteredApellido = event.target.value
+        setApellido(enteredApellido)
         if(enteredApellido !== "" && enteredApellido.length <= 20) {
-            setApellido(enteredApellido)
             setMensajeApellido("")
         } else if(enteredApellido.length > 20) {
             setMensajeApellido("El apellido no debe ser superior a 20 caracteres")
@@ -46,8 +46,8 @@ function Fomrulario() {
 
     function handleValidateEmail(event) {
         const enteredEmail = event.target.value
+        setEmail(enteredEmail)
         if(enteredEmail !== "" && enteredEmail.length <= 20 && enteredEmail.includes("@")) {
-            setEmail(enteredEmail)
             setMensajeEmail("")
         } else if(enteredEmail.length > 20) {
             setMensajeEmail("El email no debe ser superior a 20 caracteres")
@@ -60,8 +60,8 @@ function Fomrulario() {
 
     function handleValidateSexo(event) {
         const enteredSexo = event.target.value
+        setSexo(enteredSexo)
         if(enteredSexo !== "") {
-            setSexo(enteredSexo)
             setMensajeSexo("")
         } else {
             setMensajeSexo("El sexo no puede estar vacio")
@@ -70,8 +70,8 @@ function Fomrulario() {
 
     function handleValidateMensaje(event) {
         const enteredMensaje = event.target.value
+        setMensaje(enteredMensaje)
         if(enteredMensaje.length <= 500) {
-            setMensaje(enteredMensaje)
             setMensajeMensaje("")
         } else {
             setMensajeMensaje("El mensaje no debe ser superior a 500 caracteres")
@@ -80,11 +80,10 @@ function Fomrulario() {
 
     function handleValidateTerminos(event) {
         const enteredTerminos = event.target.checked
+        setTerminos(enteredTerminos)
         if (enteredTerminos) {
-            setTerminos(true)
             setMensajeTerminos("")
         } else {
-            setTerminos(false)
             setMensajeTerminos("Se tienen que aceptar los terminos y condiciones")
         }
     }
@@ -92,15 +91,16 @@ function Fomrulario() {
     const handleValidateAll = useCallback(() => {
         if 
         (
-            (nombre !== "" || nombre <= 10) &&
-            (apellido !== "" || apellido <= 20) &&
-            (email !== "" || email <= 20 && email.includes("@")) &&
+            (nombre.length !== 0 && nombre.length <= 10) &&
+            (apellido.length !== 0 && apellido.length <= 20) &&
+            (email.length <= 20) && email.includes("@") &&
             (sexo !== "") &&
             (mensaje.length <= 500) &&
             (terminos)
         ) {
             setBotonClickable(true)
         } else {
+            console.log("cambio")
             setBotonClickable(false)
         }
     }, [nombre, apellido, email, sexo, mensaje, terminos])
